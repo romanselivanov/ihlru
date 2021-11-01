@@ -1,0 +1,2 @@
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#666 #eee}body{overflow-y:scroll}body::-webkit-scrollbar{width:6px}body::-webkit-scrollbar-thumb{background-color:transparent;border-radius:3px}body::-webkit-scrollbar-track{background:#eee}body.hover::-webkit-scrollbar-thumb{background-color:#666}
+/*# sourceMappingURL=scrollbar.css.map */

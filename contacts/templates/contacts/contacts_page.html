@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% load static wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-innerpage{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+#map {
+  width: 100%;
+  height: 255px;
+}
+</style>
+
+{% if page.main_image %}
+<section class="background-inner">
+{% image page.main_image height-300 %}
+</section>
+{% endif %}
+
+<section class="module inner_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+                {% if self.get_ancestors|length > 1 %}
+                    <ol class="breadcrumb">
+                        {% for page in self.get_ancestors %}
+                        {% if page.is_root == False %}
+                        <li><a href="{% pageurl page %}">{{ page.title }}</a></li>
+                        {% endif %}
+                        {% endfor %}
+                        <li class="active">{{ self.title }}</li>
+                    </ol>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="uslugi__title title_size">{{ page.intro }}</h1></div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="map_contact__title_contact">Контактная информация</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-4 map_contact__contacts">
+                <div><i class="fa fa-map-marker"></i></div>
+                <div>{{ page.address }}</div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4 map_contact__contacts">
+                <div><i class="fa fa-phone"></i></div>
+                <div>{{ page.phone1 }}{% if page.phone2 %}<br>{{page.phone2}}{%endif%}</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% block extra_js %}
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+
+<script>
+    let map;
+    let lattid = {{page.lat}};
+    let longitude = {{page.lon}};
+
+    console.log(lattid)
+
+    function initMap() {
+        const officeLoc = { lat: lattid , lng: longitude };
+        const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 16,
+            center: officeLoc,
+        });
+
+        const marker = new google.maps.Marker({
+            position: officeLoc,
+            map: map,
+        });
+        }
+
+</script>
+
+{% endblock %}
+
+{% endblock %}

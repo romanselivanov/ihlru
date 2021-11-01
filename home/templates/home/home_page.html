@@ -1,0 +1,294 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load static wagtailuserbar %}
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+  <div id="CarouselHead" class="carousel slide carousel-dark" data-bs-ride="carousel-head">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#CarouselHead" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#CarouselHead" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#CarouselHead" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner ratio ratio-21x9">
+      <div class="carousel-item active">
+        <img class="w-100" src="{% static 'images/sl1.webp' %}"  alt="...">
+        <div class="carousel-caption">
+            <div class="row">
+                <div class="h1">
+                    <span class="slider__caption__number">3000 </span> <span class="slider__caption__title">сеансов  </span>
+                    <br><span class="slider__caption__subtext">обработки звонков <br> одновременно</span>
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="carousel-item">
+        <img class="w-100" src="{% static 'images/sl1.webp' %}" alt="...">
+        <div class="carousel-caption">
+            <div class="row">
+                <div class="h1 bg-faded">
+                  <span class="slider__caption__number">3000 </span> <span class="slider__caption__title">сеансов  </span>
+                  <br><span class="slider__caption__subtext">обработки звонков <br> одновременно</span>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img class="w-100" src="{% static 'images/sl1.webp' %}" alt="...">
+        <div class="carousel-caption">
+            <div class="row">
+                <div class="h1 text-danger bg-faded">
+                  <span class="slider__caption__number">3000 </span> <span class="slider__caption__title">сеансов  </span>
+                  <br><span class="slider__caption__subtext">обработки звонков <br> одновременно</span>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#CarouselHead" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#CarouselHead" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <!-- Marketing -->
+
+  <section class="module action" id="ha-waypoint">
+    <div class="container">
+        <div class="row text-center text-light">
+            <h1 class="action__title title_size">Почему выбирают нас?</h1>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-center action__sub_text text-light">Наше главное отличие — мы не просто обслуживаем звонки, мы используем весь опыт нашей 
+                  группы компаний для достижения необходимого Вам качественного результата по прямым контактам с Вашей целевой аудиторией.</p>
+            </div>
+        </div>
+        <div class="btn_blue_small">
+            <div class="col-6 col-xs-6">
+                <a href="/o-kompanii/" class="btn action-btn-blue">Узнать больше...</a>
+            </div>
+        </div>
+        <div class="btn_blue_big text-center">
+          <div class="col-xs-6">
+              <a href="/o-kompanii/" class="btn action-btn-blue">Узнать больше...</a>
+          </div>
+      </div>
+    </div>
+    <a href="{% url 'webform_call_back' %}" id="call" class="action__btn__call" data-bs-toggle="modal" data-bs-target="#BackCallModal"><img class="call_back" src="{% static 'images/pop_up_back_call.webp' %}" alt=""></a>
+  </section>
+
+  <!-- Multi Slide Carousel -->
+
+  <div class="text-center my-3">    
+    <div class="row mx-auto my-auto justify-content-center">
+      <h1 class="uslugi__title">НАШИ УСЛУГИ</h2>
+    </div>
+
+    <div id="recipeCarousel" class="carousel slide recipe-carousel carousel-dark" data-bs-ride="carousel">
+        <div class="container carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <div class="col-md-3">
+                  <img src="{% static 'images/service/icon_1.webp' %}" class="img-fluid">
+                  <p><span>Горячие линии со специалистами</span></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="col-md-3">
+                  <img src="{% static 'images/service/icon_2.webp' %}" class="img-fluid">
+                  <p><span>Виртуальный офис</span></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="col-md-3">
+                  <img src="{% static 'images/service/icon_3.webp' %}" class="img-fluid">
+                  <p><span>Приём заказов</span></p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="col-md-3">
+                  <img src="{% static 'images/service/icon_4.webp' %}" class="img-fluid">
+                  <p><span>Поддержка рекламных акций</span></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+                <div class="col-md-3">
+                  <img src="{% static 'images/service/icon_5.webp' %}" class="img-fluid">
+                  <p><span>Голосовые меню</span></p>
+                </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/service/icon_6.webp' %}" class="img-fluid">
+                <p><span>Телефонная линия 8-800</span></p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/service/icon_7.webp' %}" class="img-fluid">
+                <p> <span>Пример отчетности</span></p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/service/icon_8.webp' %}" class="img-fluid">
+                <p><span>Телемаркетинг</span></p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/service/icon_9.webp' %}" class="img-fluid">
+                <p><span>Актуализация баз данных</span></p>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/service/icon_10.webp' %}" class="img-fluid">
+                <p><span>Поиск новых клиентов</span></p>
+              </div>
+            </div>
+
+          </div>
+        <a class="carousel-control-prev" href="#recipeCarousel" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#recipeCarousel" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </a>
+    </div>
+    
+  </div>
+
+   <!-- Our Advantages -->
+
+  <div class="container-fluid">
+    <div class="text-center my-3">
+        <h1 class="uslugi__title">Наши преимущества</h1>
+    </div>
+
+    <div class="row opis ">
+        <div class="opis-box box_1 col-md-6">
+            <span class="opis-box__text">Круглосуточная поддержка клиентов</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>Мы предлагаем возможность ежедневного круглосуточного обслуживания, а также обслуживание по стандартному графику с 9 до 21 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="opis-box box_2 col-md-6">
+            <span class="opis-box__text">Полный учет всех поступивших вызовов</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>Наши сотрудники ведут полный учёт всех поступивших вызовов, формализованную отчетность с предоставлением по электронной почте или в режиме on-line.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row opis ">
+        <div class="opis-box box_3 col-md-6">
+            <span class="opis-box__text">Многоканальное обслуживание</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>Кроме ответов на телефонные звонки, такие специалисты могут отвечать на вопросы, поступающие по электронной почте, через контактные формы и так далее.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="opis-box box_4 col-md-6">
+            <span class="opis-box__text">Горячие линии <br> «Под ключ»</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>Мы предоставляем как комплексные услуги по организации таких горячих линий "под ключ" (в частности, мы выполняли или продолжаем выполнять такие заказы для многих </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row opis ">
+        <div class="opis-box box_5 col-md-6">
+            <span class="opis-box__text">В режиме on–line</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>Телемагазины, работающие в прямом эфире с обратной связью в режиме on-line. Если ведущий видит недостаточную активность покупателей, он вводит в действие новые предложения.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="opis-box box_6 col-md-6">
+            <span class="opis-box__text">Поддержка рекламных акций</span>
+            <div class="fade-block">
+                <div class="bottom-align">
+                    <p>На время рекламной акции call-центр может подключить новые телефонные номера, для обслуживания звонков или использовать существующий номер Заказчика.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Multi Slide Carousel -->
+
+<div class="text-center my-3">    
+  <div class="row mx-auto my-auto justify-content-center">
+    <h2 class="uslugi__title">НАШИ КЛИЕНТЫ</h2>
+  </div>
+
+  <div id="clientsCarousel" class="carousel slide client-carousel carousel-dark" data-bs-ride="carousel">
+      <div class="container carousel-inner" role="listbox">
+          <div class="carousel-item active">
+              <div class="col-md-3">
+                <img src="{% static 'images/clients/cl1.webp' %}" class="img-fluid">
+              </div>
+          </div>
+
+          <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/clients/cl2.webp' %}" class="img-fluid">
+              </div>
+          </div>
+
+          <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/clients/cl3.webp' %}" class="img-fluid">
+              </div>
+          </div>
+          <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/clients/cl4.webp' %}" class="img-fluid">
+              </div>
+          </div>
+
+          <div class="carousel-item">
+              <div class="col-md-3">
+                <img src="{% static 'images/clients/cl5.webp' %}" class="img-fluid">
+              </div>
+          </div>
+
+        </div>
+      <a class="carousel-control-prev" href="#clientsCarousel" role="button" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      </a>
+      <a class="carousel-control-next" href="#clientsCarousel" role="button" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      </a>
+  </div>
+  
+</div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-innerpage{% endblock %}
+
+{% block content %}
+
+{% if page.main_image %}
+<section class="background-inner">
+{% image page.main_image height-300 %}
+</section>
+{% endif %}
+
+<section class="module inner_page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-6">
+                    {% if self.get_ancestors|length > 1 %}
+                        <ol class="breadcrumb">
+                            {% for page in self.get_ancestors %}
+                            {% if page.is_root == False %}
+                            <li><a href="{% pageurl page %}">{{ page.title }}</a></li>
+                            {% endif %}
+                            {% endfor %}
+                            <li class="active">{{ self.title }}</li>
+                        </ol>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-10 text-center">
+                    <h1 class="uslugi__title">&laquo;{{ page.title }}&raquo;</h1></div>
+            </div>
+            <div class="row">
+                <div class="col-12 body_text">
+                    {{ page.body|richtext }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

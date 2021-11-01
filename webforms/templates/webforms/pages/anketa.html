@@ -1,0 +1,81 @@
+<div class="container">
+    <form action="{% url 'webform_anketa' %}" method="POST" id="anketa-oper">
+        <div class="row">
+            <label class="col-sm-6 control-label">Выберите вакансию</label>
+            <div class="col-sm-6">
+                <select type="text" class="form-control" id="" name="theme">
+                    <option>Оператор на телефоне</option>
+                    <option>Работа от 4-х часов в день</option>
+                    <option>Медицинский консультант (оператор Call центра)</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">ФИО</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="" name="fio" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Возраст</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="" name="age" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Образование</label>
+            <div class="col-sm-6">
+                <select type="text" class="form-control" id="" name="education">
+                    <option>Учусь очно</option>
+                    <option>Учусь заочно</option>
+                    <option>Учусь вечер</option>
+                    <option>Закончил(а)</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Опыт работы в этой сфере</label>
+            <div class="col-sm-6">
+                <select type="text" class="form-control" id="" name="experience">
+                    <option>Есть</option>
+                    <option>Нет</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Какой график работы интересует</label>
+            <div class="col-sm-6">
+                <select type="text" class="form-control" id="" name="schedule">
+                    <option>Дневной</option>
+                    <option>Вечерний</option>
+                    <option>Вечер и выходные</option>
+                    <option>Выходные</option>
+                    <option>2/2</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Контакный телефон</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="" name="phone" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">E-mail</label>
+            <div class="col-sm-6 ">
+                <input type="email" class="form-control" id="" name="email"></input>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn modal-form__btn"> отправить</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p>Или Вы можете задать вопрос по e-mail: <a href="mailto:personal@ihl.ru">personal@ihl.ru</a> </p>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>

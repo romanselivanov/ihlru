@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-careerpage{% endblock %}
+
+{% block content %}
+
+{% if page.main_image %}
+<section class="background-inner">
+    {% image page.main_image height-300 %}
+</section>
+{% endif %}
+
+<section class="module inner_page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-6">
+                {% if self.get_ancestors|length > 1 %}
+                <ol class="breadcrumb">
+                    {% for page in self.get_ancestors %}
+                    {% if page.is_root == False %}
+                    <li><a href="{% pageurl page %}">{{ page.title }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    <li class="active">{{ self.title }}</li>
+                </ol>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h1 class="uslugi__title title_size">&laquo;{{ page.title }}&raquo;</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 body_text">
+                {{ page.body|richtext }}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+        <a href="{% url 'webform_anketa' %}" class="btn action-btn-blue" data-bs-toggle="modal"
+            data-bs-target="#careerAnketa">Заполнить анкету</a>
+    </div>
+
+</section>
+
+<div class="modal fade" id="careerAnketa" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+    <div class="modal-dialog modal-lg" style="width:600px;">
+        <div class="modal-content modal-form__content">
+            <div class="modal-header text-center">
+                <h5 class="modal-title modal-form__title  w-100" id="ModalLabel">Заполните анкету</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-target="#careerAnketa"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

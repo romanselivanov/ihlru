@@ -1,0 +1,243 @@
+{% load static wagtailcore_tags wagtailuserbar %}
+{% load menu_tags %}
+
+<!doctype html>
+<html lang="ru">
+  <head>
+        <meta charset="utf-8">
+        <title>
+            {% block title %}
+                {% if page.seo_title %}{{ page.seo_title }}{% else %}{{ page.title }}{% endif %}
+            {% endblock %}
+            {% block title_suffix %}
+                {% wagtail_site as current_site %}
+                {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
+            {% endblock %}
+        </title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/icons/favicon.ico' %}"/>
+
+        {# Global stylesheets #}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ihl.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/scrollbar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome.min.css' %}">      
+        <link rel="stylesheet" type="text/css" href="{% static 'fonts/lato.css' %}">   
+
+        {% block extra_css %}
+            {# Override this in templates to add extra stylesheets #}
+        {% endblock %}
+    </head>
+
+    <body class="{% block body_class %}{% endblock %}">
+        <header>
+
+            <nav class="container-fluid fixed-top navbar-expand-lg ha-header" aria-label="navbarTop">            
+                <div class="container navbar-top">      
+                <div class="collapse navbar-collapse" id="navbarTop">
+                    <div class="col-md-4 text-center">
+                        <span class="module_menu__menu_top__items"><img src="{% static 'images/icons/top_menu_mail.webp' %}" alt=""><span><a href="mailto:in@ihl.ru">in@ihl.ru</a></span></span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                    <span class="module_menu__menu_top__items"><img src="{% static 'images/icons/top_menu_phone.webp' %}" alt="">
+                    <span><a href="tel:+74957881632"> +7 (495) 788-16-32</a></span></span>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span class="module_menu__menu_top__items "><img src="{% static 'images/icons/top_menu_call.webp' %}" alt=""><span><a href="{% url 'webform_call_back' %}" data-bs-toggle="modal" data-bs-target="#BackCallModal">Заказать звонок</a></span></span>
+                    </div>
+                </div>
+                </div>
+            
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container">
+                    <a class="navbar-brand logo" href="/">ihl.ru</a>      
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse">        
+                    <span><a href="tel:+74957881632"><img src="{% static 'images/icons/top_menu_phone.webp' %}" alt=""></a></span>
+                    </button>  
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMainMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    </button>                
+                    <div class="navbar-collapse collapse" id="navbarMainMenu">
+                    <ul class="navbar-nav ms-auto justify-content-end">
+                        <li><a class="nav-link active" href="/o-kompanii/">О компании</a></li>
+                        <li class="dropdown">
+                        <a class="nav-link active dropdown-toggle" href="/uslugi/" data-bs-toggle="dropdown" aria-expanded="false">Услуги</a>
+                        {% flat_menu 'uslugi' template="sub_menu.html" fall_back_to_default_site_menus=True %}
+                        </li>
+                        <li><a class="nav-link active" href="/arenda-operatorov/">Аренда операторов</a></li>
+                        <li><a class="nav-link active" href="/eksperty-o-call-centrah/">Эксперты о call-центрах</a></li>
+                        <li class="dropdown">
+                        <a class="nav-link active dropdown-toggle" href="/karera/" data-bs-toggle="dropdown" aria-expanded="false">Карьера</a>
+                        {% flat_menu 'karera' template="sub_menu.html" fall_back_to_default_site_menus=True %}
+                        </li>
+                        <li class="dropdown">
+                        <a class="nav-link active dropdown-toggle" href="/kontakty/" data-bs-toggle="dropdown" aria-expanded="false">Контакты</a>
+                        {% flat_menu 'kontakty' template="sub_menu.html" fall_back_to_default_site_menus=True %}
+                        </li>
+                    </ul>
+                    </div>  
+                </div>
+                </nav>
+            
+            </nav>            
+        </header>
+            
+        <main>
+
+        {% wagtailuserbar %}
+
+        {% block content %}{% endblock %}
+
+        <div class="container-fluid call_back_form">
+            <div class="container">
+          
+            <h1 class="title_size call_back_form__title text-center">Отправить запрос на оказание услуг</h1>
+          
+            <div class="row justify-content-center call_back_form_content">
+                <div class="row col-12 col-md-12 col-lg-10 col-xl-9">
+
+                    <form action="{% url 'webform_order_services' %}" id="bottom-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-6 call_back_form__text">
+                                <label for="company">Название компании*</label>
+                                <input type="text" class="form-control input-lg" id="company" required="required" name="company">
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 call_back_form__text">
+                                <label for="business">Сфера деятельности</label>
+                                <input type="text" class="form-control input-lg" id="business" name="business">
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 call_back_form__text">
+                                <label for="position">Должность</label>
+                                <input type="text" class="form-control input-lg" id="position" name="position">
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-6 call_back_form__text">
+                                <label for="fio">ФИО*</label>
+                                <input type="text" class="form-control input-lg" id="fio" required="required" name="fio">
+                            </div>          
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 call_back_form__text">
+                              <label for="phone">Номер телефона</label>
+                              <input type="text" class="form-control input-lg" id="phone" name="phone">
+                            </div>          
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-6 call_back_form__text">
+                                <label for="email">E-mail*</label>
+                                <input type="email" class="form-control input-lg" id="email" required="required" name="email">
+                                <input class="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 call_back_form__text">
+                                <label for="message">Сообщение*</label>
+                                <textarea class="form-control" rows="4" required="required" id="message" name="message"></textarea>
+                            </div>
+                        </div>                        
+                        <div class="row">
+                          <div class="col-12 text-center">
+                            <button class="btn btn-primary call_back_form__btn action-btn-blue" type="submit">Отправить</button>
+                          </div>
+                          
+                        </div>
+                    </form>
+          
+                </div>
+            </div>
+
+            <div class="row hidden call_back_form_succes">
+                <div class="col-xs-12">
+                    <h3 class="text-center text-light">Спасибо за обращение!</h3>
+                    <p  class="text-center text-light">Мы свяжемся с вами в ближайшее время!</p>
+                </div>
+            </div>
+
+            </div>
+        </div>
+          
+        <!-- Footer -->
+        
+        <div class="container-fluid bg-grey">
+            <div class="container footer">
+                <div class="row">
+                    <div class="col-lg-2 col-sm-4 footer__left">
+                        <h5>Меню</h5>
+                        <ul>
+                            <li><a href="/o-kompanii/">О компаниии</a></li>
+                            <li><a href="/uslugi/">Услуги</a></li>
+                            <li><a href="/arenda-operatorov/">Аренда операторов</a></li>
+                            <li><a href="/karera/">Карьера</a></li>
+                            <li><a href="/kontakty/">Контакты</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 col-sm-8 footer__left">
+                            <h5>Услуги</h5>
+                            <ul>
+                                <li><a href="/uslugi/goryachie-linii-so-specialistami/">Горячие линии со специалистами</a></li>
+                                <li><a href="/uslugi/aktualizaciya-baz-dannyh/">Актуализация баз данных</a></li>
+                                <li><a href="/uslugi/dlya-ofisnyh-house-call-centrov/">Для офисных (in-house) call-центров</a></li>
+                                <li><a href="/uslugi/podderzhka-reklamnyh-akcij/">Поддержка рекламных акций</a></li>
+                                <li><a href="/uslugi/poisk-novyh-klientov/">Поиск новых клиентов</a></li>
+                                <li><a href="/uslugi/sozdanie-call-centrov/">Создание call-центров</a></li>
+                                <li><a href="/uslugi/primer-otchetnosti/">Пример отчетности</a></li>
+                                <li><a href="/uslugi/telemarketing/">Телемаркетинг</a></li>
+                                <li><a href="/uslugi/virtualnyj-ofis/">Виртуальный офис</a></li>
+                                <li><a href="/uslugi/priyom-zakazov/">Приём заказов</a></li>
+                                <li><a href="/uslugi/golosovye-menyu/">Голосовые меню</a></li>
+                                <li><a href="/uslugi/prodazhi-po-telefonu/">Продажи по телефону</a></li>
+                                <li><a href="/uslugi/testy-telefonnyh-sluzhb/">Тесты телефонных служб</a></li>
+                                <li><a href="/uslugi/8-800/">8-800</a></li>
+                            </ul>
+                    </div>
+                    <div class="col-lg-3 col-sm-4 footer__left">
+                        <div>
+                            <h5>Контакты в москве</h5>
+                            <ul>
+                                <li><i class="fas fa-map-marker"></i> ул. Б.Тульская, д. 10 стр.5</li>
+                                <li><i class="fa fa-phone"></i> +7 (495) 788-16-32</li>
+                                <li> <i class="fa fa-desktop"></i>+7 (495) 788-16-30</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-8 footer__left">
+                        <div>
+                            <h5>Контакты в Туле</h5>
+                            <ul>
+                                <li><i class="fas fa-map-marker"></i> ул.Фрунзе, д.13</li>
+                                <li><i class="fas fa-phone"></i> +7 (953) 186-78-90</li>
+                                <li><i class="fas fa-phone"></i> 8 (800) 555-11-98 - звонок для всех регионов России бесплатный</li>
+                                <li><i class="fa fa-desktop"></i> +7 (495) 788-16-30</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container footer-end">
+                <p class="float-end"><a href="#" class=" text-light">Вверх</a></p>
+                <p class="text-light">&copy; 2002-2021 call-центр «Горячие линии»</p>
+            </div>
+        
+        </div>
+
+        <div class="modal fade" id="BackCallModal" tabindex="-1" role="dialog" aria-labelledby="SmModalLabel">
+            <div class="modal-dialog" >
+                <div class="modal-content modal-form__content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title modal-form__title w-100" id="ModalLabel">Заполните анкету</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-target="#BackCallModal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {# Global javascript #}
+        <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/ihl.js' %}"></script>
+        <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LfTo7scAAAAACx5oHpKGBB7Z-D8kqP2qmHLNl1y"></script> -->
+                   
+    </body>
+</html>

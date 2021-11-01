@@ -1,0 +1,45 @@
+<div class="container">
+    <form action="{% url 'webform_call_back' %}" method="POST" id="call-back">       
+        <div class="row">
+            <label class="col-sm-6 control-label">Тема</label>
+            <div class="col-sm-6">
+                <select type="text" class="form-control" id="" name="theme">
+                    <option>Входящие звонки</option>
+                    <option>Исходящие звонки</option>
+                    <option>Аренда операторов</option>
+                    <option>Сотрудничество</option>
+                    <option>Другое</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">ФИО</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="" name="fio" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Контакный телефон</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="" name="phone" required="required">
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-sm-6 control-label">Сообщение</label>
+            <div class="col-sm-6 ">
+                <textarea type="text" class="form-control" id="s" rows="3" name="message" required="required"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn btn-block modal-form__btn"> отправить</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p>Или Вы можете задать вопрос по e-mail: <a href="in@ihl.ru">in@ihl.ru</a> </p>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
